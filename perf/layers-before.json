@@ -1,0 +1,515 @@
+{
+  "layers": {
+    "count": 0,
+    "reasons": {}
+  },
+  "counts": {
+    "total": 1016,
+    "willChange": [
+      {
+        "tag": "button.btn",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "span.",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "button.btn",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "div.hero__glow",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "p.eyebrow",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "span.word__i",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "span.word__i",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "span.word__i",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "span.word__i",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "span.word__i",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "span.word__i",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "p.lead",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "div.hero__cta",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "button.btn",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "a.link-arrow",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "ul.hero__meta",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "div.card-3d",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "span.card__sheen",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "div.hero__shadow",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "i.is-animating",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "div.showcase__bg",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "div.card-3d",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "span.qr-scan",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "div.phone",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "div.ph-stars",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "button.ph-star",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "button.ph-star",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "button.ph-star",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "button.ph-star",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "button.ph-star",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "span.word__i",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "span.word__i",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "span.word__i",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "span.word__i",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "span.word__i",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "span.word__i",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "span.word__i",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "span.word__i",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "span.word__i",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "p.eyebrow",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "span.word__i",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "span.word__i",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "span.word__i",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "span.word__i",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "span.word__i",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "span.word__i",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "span.word__i",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "p.lead",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "article.bento__card",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "article.bento__card",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "article.bento__card",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "article.bento__card",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "article.bento__card",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "article.bento__card",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "article.bento__card",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "a.link-arrow",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "p.eyebrow",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "span.word__i",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "span.word__i",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "span.word__i",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "div.stats__bg",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "p.eyebrow",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "span.word__i",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "span.word__i",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "span.word__i",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "span.word__i",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "span.word__i",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "span.word__i",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "p.lead",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "p.eyebrow",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "span.word__i",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "span.word__i",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "span.word__i",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "span.word__i",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "div.marquee__track",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "div.marquee__track",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "div.marquee__track",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "div.marquee__track",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "div.pricing__bg",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "p.eyebrow",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "span.word__i",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "span.word__i",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "span.word__i",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "span.word__i",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "span.word__i",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "span.word__i",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "p.lead",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "article.plan",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "button.btn",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "article.plan",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "button.btn",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "article.plan",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "a.btn",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "p.eyebrow",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "span.word__i",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "span.word__i",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "span.word__i",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "span.word__i",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "div.closing__glow",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "span.word__i",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "span.word__i",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "span.word__i",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "span.word__i",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "span.word__i",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "span.word__i",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "span.word__i",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "span.word__i",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "span.word__i",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "span.word__i",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "span.word__i",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "span.word__i",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "div.closing__cta",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "button.btn",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "a.link-arrow",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "ul.closing__contact",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "button.btn",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "a.fab",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "button.btn",
+        "wc": "transform, opacity"
+      }
+    ],
+    "backdropFilter": [
+      {
+        "tag": "header.nav",
+        "b": "saturate(1.8) blur(10px)",
+        "fixed": true
+      }
+    ],
+    "filter": [
+      {
+        "tag": "div.hero__shadow",
+        "f": "blur(8px)"
+      },
+      {
+        "tag": "span.step__glow",
+        "f": "blur(6px)"
+      }
+    ],
+    "sticky": [],
+    "fixed": [
+      "a.skip-link",
+      "header.nav",
+      "div.mobile-menu",
+      "a.fab"
+    ],
+    "infiniteTweens": [
+      "div.card-3d",
+      "div.hero__shadow",
+      "span.card__sheen",
+      "i.is-animating"
+    ],
+    "activeScrollTriggers": 1,
+    "totalScrollTriggers": 50
+  }
+}

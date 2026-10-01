@@ -1,0 +1,50 @@
+{
+  "layers": {
+    "count": 0,
+    "reasons": {}
+  },
+  "counts": {
+    "total": 1016,
+    "willChange": [
+      {
+        "tag": "div.card-3d",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "span.card__sheen",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "div.hero__shadow",
+        "wc": "transform, opacity"
+      },
+      {
+        "tag": "i.is-animating",
+        "wc": "transform, opacity"
+      }
+    ],
+    "backdropFilter": [
+      {
+        "tag": "header.nav",
+        "b": "saturate(1.8) blur(10px)",
+        "fixed": true
+      }
+    ],
+    "filter": [],
+    "sticky": [],
+    "fixed": [
+      "a.skip-link",
+      "header.nav",
+      "div.mobile-menu",
+      "a.fab"
+    ],
+    "infiniteTweens": [
+      "i.is-animating",
+      "div.card-3d",
+      "div.hero__shadow",
+      "span.card__sheen"
+    ],
+    "activeScrollTriggers": 1,
+    "totalScrollTriggers": 50
+  }
+}

@@ -1,0 +1,212 @@
+{
+  "audit": {
+    "domNodes": 1081,
+    "backdropCount": 4,
+    "backdrop": [
+      {
+        "sel": "header.nav",
+        "blur": "20",
+        "fixed": true
+      },
+      {
+        "sel": "div.mobile-menu",
+        "blur": "20",
+        "fixed": true
+      },
+      {
+        "sel": "span.mat__chip",
+        "blur": "10",
+        "fixed": false
+      },
+      {
+        "sel": "span.mat__chip",
+        "blur": "10",
+        "fixed": false
+      }
+    ],
+    "willChangeCount": 127,
+    "willChangeSample": [
+      "transform @ button.btn",
+      "transform @ span.",
+      "transform @ button.btn",
+      "transform @ div.hero__glow",
+      "transform, opacity @ p.eyebrow",
+      "transform, opacity @ span.word__i",
+      "transform, opacity @ span.word__i",
+      "transform, opacity @ span.word__i",
+      "transform, opacity @ span.word__i",
+      "transform, opacity @ span.word__i",
+      "transform, opacity @ span.word__i",
+      "transform, opacity @ p.lead",
+      "transform, opacity @ div.hero__cta",
+      "transform @ button.btn"
+    ],
+    "filterCount": 2,
+    "filters": [
+      "div.hero__shadow → blur(8px)",
+      "span.step__glow → blur(6px)"
+    ],
+    "infiniteTweens": [
+      {
+        "type": "Tween",
+        "target": "div.card-3d",
+        "vars": "rotateY,rotateX,y,yoyo,repeat,delay,overwrite"
+      },
+      {
+        "type": "Tween",
+        "target": "div.hero__shadow",
+        "vars": "scaleX,opacity,yoyo,repeat,delay,overwrite"
+      },
+      {
+        "type": "Tween",
+        "target": "span.card__sheen",
+        "vars": "xPercent,delay,repeat,repeatDelay,parent,immediateRender,startAt,overwrite"
+      },
+      {
+        "type": "Tween",
+        "target": "i.",
+        "vars": "scaleY,repeat,yoyo,parent,immediateRender,startAt,overwrite,delay"
+      }
+    ],
+    "scrollTriggers": 55,
+    "lenisOptions": {
+      "duration": 1.05,
+      "smoothWheel": true
+    }
+  },
+  "rows": [
+    {
+      "name": "hero + awal",
+      "work": {
+        "n": 132,
+        "workAvg": 0.45,
+        "workP95": 0.9,
+        "workMax": 1.1,
+        "gapAvg": 16.67,
+        "gapP95": 18.1,
+        "gapMax": 20.6,
+        "gapOver32": 0,
+        "gapOver50": 0,
+        "workOver16": 0
+      },
+      "delta": {
+        "script": 122,
+        "style": 77,
+        "layout": 2,
+        "recalcCount": 414,
+        "layoutCount": 4
+      }
+    },
+    {
+      "name": "showcase (pinned)",
+      "work": {
+        "n": 132,
+        "workAvg": 0.57,
+        "workP95": 1,
+        "workMax": 1.2,
+        "gapAvg": 16.73,
+        "gapP95": 18.2,
+        "gapMax": 24.1,
+        "gapOver32": 0,
+        "gapOver50": 0,
+        "workOver16": 0
+      },
+      "delta": {
+        "script": 111,
+        "style": 102,
+        "layout": 3,
+        "recalcCount": 415,
+        "layoutCount": 8
+      }
+    },
+    {
+      "name": "fitur + langkah",
+      "work": {
+        "n": 131,
+        "workAvg": 1.11,
+        "workP95": 2.7,
+        "workMax": 4.4,
+        "gapAvg": 16.78,
+        "gapP95": 19.1,
+        "gapMax": 41.9,
+        "gapOver32": 1,
+        "gapOver50": 0,
+        "workOver16": 0
+      },
+      "delta": {
+        "script": 179,
+        "style": 315,
+        "layout": 36,
+        "recalcCount": 415,
+        "layoutCount": 57
+      }
+    },
+    {
+      "name": "stats + bahan",
+      "work": {
+        "n": 132,
+        "workAvg": 0.45,
+        "workP95": 1.1,
+        "workMax": 1.6,
+        "gapAvg": 16.65,
+        "gapP95": 17.8,
+        "gapMax": 18.6,
+        "gapOver32": 0,
+        "gapOver50": 0,
+        "workOver16": 0
+      },
+      "delta": {
+        "script": 98,
+        "style": 65,
+        "layout": 10,
+        "recalcCount": 400,
+        "layoutCount": 17
+      }
+    },
+    {
+      "name": "testimoni + harga",
+      "work": {
+        "n": 132,
+        "workAvg": 0.91,
+        "workP95": 1.9,
+        "workMax": 2.4,
+        "gapAvg": 16.67,
+        "gapP95": 17.9,
+        "gapMax": 19.2,
+        "gapOver32": 0,
+        "gapOver50": 0,
+        "workOver16": 0
+      },
+      "delta": {
+        "script": 120,
+        "style": 80,
+        "layout": 53,
+        "recalcCount": 404,
+        "layoutCount": 65
+      }
+    },
+    {
+      "name": "faq + closing",
+      "work": {
+        "n": 132,
+        "workAvg": 0.34,
+        "workP95": 0.9,
+        "workMax": 1.3,
+        "gapAvg": 16.67,
+        "gapP95": 17.8,
+        "gapMax": 18.5,
+        "gapOver32": 0,
+        "gapOver50": 0,
+        "workOver16": 0
+      },
+      "delta": {
+        "script": 66,
+        "style": 41,
+        "layout": 5,
+        "recalcCount": 297,
+        "layoutCount": 7
+      }
+    }
+  ],
+  "screencast": 3
+}

@@ -1,0 +1,74 @@
+{
+  "label": "before",
+  "throttle": 4,
+  "results": {
+    "desktop 1440": {
+      "scrolledPx": 7964,
+      "frames": 358,
+      "avg": 16.67,
+      "p50": 16.7,
+      "p95": 16.8,
+      "p99": 16.8,
+      "max": 16.8,
+      "over32": 0,
+      "over50": 0,
+      "over100": 0,
+      "longTasks": [],
+      "longTasksTotal": 0,
+      "loafs": 0,
+      "loafBlocking": 0,
+      "handlers": {},
+      "diag": {
+        "domNodes": 1081,
+        "willChange": 127,
+        "backdropBlur": 4,
+        "filter": 2,
+        "cssAnimation": 5,
+        "contain": 0,
+        "navBlur": "20",
+        "scrollTriggers": 43,
+        "lenis": true,
+        "pinSpacer": true,
+        "infiniteTweens": 4
+      },
+      "wheel": {
+        "moved": 299,
+        "after": 299
+      }
+    },
+    "mobile 390": {
+      "scrolledPx": 7942,
+      "frames": 357,
+      "avg": 16.71,
+      "p50": 16.7,
+      "p95": 16.7,
+      "p99": 16.8,
+      "max": 33.4,
+      "over32": 1,
+      "over50": 0,
+      "over100": 0,
+      "longTasks": [],
+      "longTasksTotal": 0,
+      "loafs": 0,
+      "loafBlocking": 0,
+      "handlers": {},
+      "diag": {
+        "domNodes": 1080,
+        "willChange": 127,
+        "backdropBlur": 4,
+        "filter": 2,
+        "cssAnimation": 5,
+        "contain": 0,
+        "navBlur": "20",
+        "scrollTriggers": 27,
+        "lenis": true,
+        "pinSpacer": false,
+        "infiniteTweens": 4
+      },
+      "wheel": {
+        "moved": 300,
+        "after": 300
+      }
+    }
+  }
+}

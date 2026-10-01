@@ -1,0 +1,75 @@
+{
+  "throttle": 4,
+  "results": {
+    "desktop 1440": {
+      "frames": 358,
+      "avg": 16.7,
+      "p50": 16.7,
+      "p95": 18.1,
+      "p99": 21.4,
+      "max": 41.5,
+      "over32": 1,
+      "over50": 0,
+      "over100": 0,
+      "workAvg": 0.96,
+      "workP95": 2.1,
+      "workMax": 5.2,
+      "longTasks": [],
+      "longTasksTotal": 0,
+      "loafs": 0,
+      "loafBlocking": 0,
+      "run2": {
+        "over50": 0,
+        "max": 23.4,
+        "p95": 17.7,
+        "longTasksTotal": 0,
+        "workAvg": 0.48,
+        "workMax": 5.2
+      },
+      "wheelMoved": 299,
+      "delta": {
+        "style": 336,
+        "recalcs": 995,
+        "layout": 133,
+        "layouts": 178,
+        "script": 410
+      },
+      "promoted": 0
+    },
+    "mobile 390": {
+      "frames": 359,
+      "avg": 16.66,
+      "p50": 16.7,
+      "p95": 17.6,
+      "p99": 18.2,
+      "max": 20.5,
+      "over32": 0,
+      "over50": 0,
+      "over100": 0,
+      "workAvg": 0.69,
+      "workP95": 1.7,
+      "workMax": 2.8,
+      "longTasks": [],
+      "longTasksTotal": 0,
+      "loafs": 0,
+      "loafBlocking": 0,
+      "run2": {
+        "over50": 0,
+        "max": 25.2,
+        "p95": 17.8,
+        "longTasksTotal": 0,
+        "workAvg": 0.25,
+        "workMax": 1.4
+      },
+      "wheelMoved": 149,
+      "delta": {
+        "style": 146,
+        "recalcs": 894,
+        "layout": 132,
+        "layouts": 188,
+        "script": 260
+      },
+      "promoted": 0
+    }
+  }
+}

@@ -1,0 +1,247 @@
+{
+  "throttle": 4,
+  "out": {
+    "baseline": {
+      "hero": {
+        "style": 77,
+        "recalcs": 378,
+        "layout": 1,
+        "layouts": 4,
+        "script": 109
+      },
+      "showcase": {
+        "style": 87,
+        "recalcs": 370,
+        "layout": 1,
+        "layouts": 4,
+        "script": 121
+      },
+      "fitur": {
+        "style": 345,
+        "recalcs": 378,
+        "layout": 28,
+        "layouts": 45,
+        "script": 171
+      },
+      "harga": {
+        "style": 100,
+        "recalcs": 367,
+        "layout": 67,
+        "layouts": 95,
+        "script": 136
+      }
+    },
+    "no-will-change": {
+      "hero": {
+        "style": 71,
+        "recalcs": 379,
+        "layout": 0,
+        "layouts": 3,
+        "script": 95
+      },
+      "showcase": {
+        "style": 87,
+        "recalcs": 367,
+        "layout": 1,
+        "layouts": 3,
+        "script": 104
+      },
+      "fitur": {
+        "style": 56,
+        "recalcs": 363,
+        "layout": 0,
+        "layouts": 1,
+        "script": 88
+      },
+      "harga": {
+        "style": 50,
+        "recalcs": 363,
+        "layout": 0,
+        "layouts": 0,
+        "script": 74
+      }
+    },
+    "no-backdrop-blur": {
+      "hero": {
+        "style": 56,
+        "recalcs": 378,
+        "layout": 1,
+        "layouts": 3,
+        "script": 98
+      },
+      "showcase": {
+        "style": 83,
+        "recalcs": 367,
+        "layout": 1,
+        "layouts": 3,
+        "script": 105
+      },
+      "fitur": {
+        "style": 61,
+        "recalcs": 363,
+        "layout": 1,
+        "layouts": 1,
+        "script": 86
+      },
+      "harga": {
+        "style": 59,
+        "recalcs": 363,
+        "layout": 0,
+        "layouts": 0,
+        "script": 74
+      }
+    },
+    "no-css-filters": {
+      "hero": {
+        "style": 64,
+        "recalcs": 378,
+        "layout": 1,
+        "layouts": 3,
+        "script": 98
+      },
+      "showcase": {
+        "style": 85,
+        "recalcs": 367,
+        "layout": 0,
+        "layouts": 3,
+        "script": 112
+      },
+      "fitur": {
+        "style": 58,
+        "recalcs": 363,
+        "layout": 0,
+        "layouts": 1,
+        "script": 84
+      },
+      "harga": {
+        "style": 50,
+        "recalcs": 363,
+        "layout": 0,
+        "layouts": 0,
+        "script": 77
+      }
+    },
+    "no-infinite-tweens": {
+      "hero": {
+        "style": 53,
+        "recalcs": 378,
+        "layout": 1,
+        "layouts": 3,
+        "script": 84
+      },
+      "showcase": {
+        "style": 69,
+        "recalcs": 367,
+        "layout": 1,
+        "layouts": 3,
+        "script": 92
+      },
+      "fitur": {
+        "style": 49,
+        "recalcs": 363,
+        "layout": 0,
+        "layouts": 1,
+        "script": 67
+      },
+      "harga": {
+        "style": 40,
+        "recalcs": 363,
+        "layout": 0,
+        "layouts": 0,
+        "script": 66
+      }
+    },
+    "no-marquee": {
+      "hero": {
+        "style": 51,
+        "recalcs": 378,
+        "layout": 1,
+        "layouts": 3,
+        "script": 89
+      },
+      "showcase": {
+        "style": 67,
+        "recalcs": 367,
+        "layout": 1,
+        "layouts": 3,
+        "script": 85
+      },
+      "fitur": {
+        "style": 46,
+        "recalcs": 363,
+        "layout": 1,
+        "layouts": 1,
+        "script": 67
+      },
+      "harga": {
+        "style": 38,
+        "recalcs": 363,
+        "layout": 0,
+        "layouts": 0,
+        "script": 63
+      }
+    },
+    "no-all-3": {
+      "hero": {
+        "style": 48,
+        "recalcs": 378,
+        "layout": 1,
+        "layouts": 3,
+        "script": 83
+      },
+      "showcase": {
+        "style": 68,
+        "recalcs": 367,
+        "layout": 2,
+        "layouts": 3,
+        "script": 111
+      },
+      "fitur": {
+        "style": 46,
+        "recalcs": 363,
+        "layout": 0,
+        "layouts": 1,
+        "script": 69
+      },
+      "harga": {
+        "style": 46,
+        "recalcs": 363,
+        "layout": 0,
+        "layouts": 0,
+        "script": 73
+      }
+    }
+  },
+  "deltas": [
+    {
+      "name": "no-marquee",
+      "styleSaved": 407,
+      "pct": 66.8
+    },
+    {
+      "name": "no-all-3",
+      "styleSaved": 401,
+      "pct": 65.8
+    },
+    {
+      "name": "no-infinite-tweens",
+      "styleSaved": 398,
+      "pct": 65.4
+    },
+    {
+      "name": "no-css-filters",
+      "styleSaved": 352,
+      "pct": 57.8
+    },
+    {
+      "name": "no-backdrop-blur",
+      "styleSaved": 350,
+      "pct": 57.5
+    },
+    {
+      "name": "no-will-change",
+      "styleSaved": 345,
+      "pct": 56.7
+    }
+  ]
+}
