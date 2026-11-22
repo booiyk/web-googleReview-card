@@ -21,11 +21,12 @@ google-card-review/
 ├── test-overlap.mjs    # cek FAB tidak menutupi elemen interaktif
 ├── test-gating.mjs     # cek loop tak berujung berhenti saat di luar layar
 ├── test-perf.mjs       # ukur scroll + CPU throttle 4x
-├── verify-test-catches-bug.mjs  # bukti bahwa test visual benar-benar menangkap bug
 ├── count-layers.mjs    # audit elemen yang dipromosikan jadi layer
-├── diagnose.mjs        # audit sumber biaya + biaya kerja per fase
 ├── ablate.mjs          # ablation study (reload per varian, urutan diacak)
-└── profile-scroll.mjs  # frame time + long task + LoAF
+├── profile-scroll.mjs  # frame time + long task + LoAF
+├── perf/               # hasil pengukuran (JSON) dari test-perf.mjs
+├── screenshots/        # screenshot tiap langkah showcase (desktop + mobile)
+└── shots/              # screenshot tiap section di 7 viewport
 ```
 
 Tanpa build step, tanpa framework. Buka `index.html` langsung, atau jalankan server statis:
@@ -48,10 +49,10 @@ Semua nilai ini terpusat agar mudah diganti:
 | Nomor WhatsApp | `script.js` → `CONFIG.waNumber` | `6288212725000` |
 | Nomor WA di HTML | `index.html`, semua `href="https://wa.me/…"` | `6288212725000` |
 | Nomor tampil di halaman | `index.html` → CTA penutup | `0882-1272-5000` |
-| Domain | `index.html` → `<link rel="canonical">`, `og:url` | `https://example.com/` |
-| Gambar Open Graph | `index.html` → `og:image` | `assets/og-cover.svg` |
-| Statistik bisnis | `index.html` → `data-count` | 4,9 / 3 dtk / 90% / 2 hari (contoh) |
-| Testimoni | `index.html` → `.tcard` | 7 testimoni contoh |
+| Domain | `index.html` → `<link rel="canonical">`, `og:url` | `https://web-card-iota.vercel.app` (sudah diganti dari `example.com`) |
+| Gambar Open Graph | `index.html` → `og:image` | `https://web-card-iota.vercel.app/assets/og-cover.png` (1200×630, dari crop hero — bukan render `og-cover.svg`) |
+| Statistik bisnis | `index.html` → `data-count` | 4,9 / 3 dtk / 90% / 2 hari — **CONTOH, wajib ganti data asli** |
+| Testimoni | `index.html` → `.tcard` | 7 testimoni — **CONTOH, wajib ganti testimoni asli** |
 
 Nomor WhatsApp diubah di dua tempat: `CONFIG.waNumber` di `script.js` (dipakai JS) dan
 atribut `href` di HTML (supaya tetap berfungsi tanpa JS). Setelah ganti nomor,
@@ -59,10 +60,19 @@ jalankan `test-runtime.mjs` untuk memastikan tautannya benar.
 
 Kontak hanya lewat WhatsApp — tidak ada email di halaman.
 
+> **Catatan jujur sebelum publish:** angka statistik (4,9 / 3 detik / 90% / 2 hari)
+> dan ketujuh testimoni di halaman ini masih **contoh karangan**, bukan data
+> bisnis nyata — ganti dengan data asli sebelum dipakai untuk menjual.
+> Domain di `canonical` dan `og:url` sudah `https://web-card-iota.vercel.app`, dan `og:image` sudah URL absolut ke `assets/og-cover.png`. Nomor WhatsApp
+> yang dipakai di seluruh halaman adalah `6288212725000` (`CONFIG.waNumber`
+> di `script.js` dan semua `href="https://wa.me/6288212725000"` di HTML).
+
 ## Sistem desain
 
 **Palet** — putih `#fff`, abu terang `#f5f5f7`, hitam `#000`, teks abu `#6e6e73`,
-aksen tunggal biru Google `#1a73e8`. Hijau `#25d366` hanya untuk tombol WhatsApp.
+aksen tunggal biru `#0b57d0` (varian gelap `#0842a0`, varian terang `#1a73e8`).
+Hijau `#25d366` hanya untuk tombol WhatsApp. Biru `#1a73e8` yang dulu jadi aksen
+utama kini hanya dipakai sebagai `--blue-l` (varian terang).
 
 **Tipografi** — `-apple-system` / `SF Pro Display` / `Inter`. Headline `clamp(40px → 84px)`
 weight 700 `letter-spacing -0.028em`. Sub-headline 17–24px warna abu.
@@ -104,8 +114,12 @@ dan tidak ada pin yang menyembunyikan konten saat JS gagal.
 **`prefers-reduced-motion`** mematikan: preloader dilewati, semua elemen langsung tampil,
 marquee berhenti, pulse FAB berhenti, pin tidak aktif. Konten tetap 100% terbaca.
 
-**Tanpa JavaScript** halaman tetap utuh: ada kelas `.no-js` yang mengembalikan semua
-opacity ke normal, dan semua CTA tetap berupa tautan `wa.me` yang berfungsi.
+**Tanpa JavaScript** — masih bermasalah di salinan ini: aturan `.no-js` ada di
+`style.css` (termasuk `.no-js .preloader { display: none; }`), tapi kelas
+`no-js` tidak pernah dipasang di `<html>` (`index.html` baris 2 polos), sehingga
+preloader menutupi halaman selamanya kalau JS mati. Perbaiki dulu sebelum
+mengklaim halaman utuh tanpa JS. Semua CTA tetap berupa tautan `wa.me` yang
+berfungsi tanpa JS.
 
 **Parallax dihindari di section yang di-pin** — posisi `fixed` dari ScrollTrigger akan
 berebut dengan transform berbasis scroll.
@@ -164,10 +178,11 @@ Isi layar HP adalah mockup perangkat, bukan UI situs. Tiga aturan yang dipegang:
 - **Ukuran relatif.** Semua font memakai `cqw` (container query unit) terhadap
   lebar `.phone__screen` yang punya `container-type: inline-size`. Mockup ikut
   berskala di viewport mana pun tanpa media query.
-- **Hanya satu view terlihat.** `showView()` 먼저 memaksa view yang ditinggalkan
-  ke `autoAlpha: 0` (tween-nya dibunuh) sebelum view baru ditampilkan. Kalau
-  tidak, view lama masih terlihat di tengah transisi dan judul "Seberapa puas…"
-  menimpa label routing.
+- **Hanya satu view terlihat.** `showView()` hanya menukar kelas `.is-active`
+  antar `.phone__view` (CSS yang mengatur opacity/visibility). View yang
+  ditinggalkan tidak lagi dipaksa lewat tween — pergantiannya kini terjadi di
+  dalam timeline scrub showcase (lihat "Perubahan terakhir"), jadi posisi
+  scroll yang sama selalu menampilkan view yang sama.
 
 Kartu produk diberi "zona aman": `padding-right: 42%` membuat semua teks terkumpul
 di kolom kiri, sehingga HP yang menumpuk di kanan hanya menutupi area kosong.
@@ -203,17 +218,13 @@ Dua jebakan yang membuat tes ini mudah berbohong, dan cara mengatasinya:
    merusak state transform internal GSAP.
 3. **Backtick di dalam template literal** dan `ev()` yang mengembalikan
    `undefined` saat halaman melempar error membuat audit yang gagal diam-diam
-   terlihat "bersih". Sekarang `ev()` melempar exception, dan
-   `verify-test-catches-bug.mjs` membuktikan tiap kelas bug memang terdeteksi.
+   terlihat "bersih". Sekarang `ev()` melempar exception.
 
-Bukti sensitivitas tes:
-
-```
-A) kartu tanpa zona kosong (HP menutupi teks kartu)   → 20 temuan, exit 1
-B) isi layar HP menumpuk di atas (tidak tersebar)      → 11 temuan, exit 1
-C) dua view HP tampil bersamaan                        →  5 temuan, exit 1
-kondisi benar                                           →  0 temuan, exit 0
-```
+> Catatan: file `verify-test-catches-bug.mjs` yang dulu membuktikan
+> sensitivitas tes ini **tidak ada di repo** (tidak ada di `ls *.mjs`),
+> jadi klaim bukti sensitivitas di bawah ini sudah dihapus — jangan
+> mengandalkannya sampai skrip pembuktiannya ditulis ulang dan
+> benar-benar dijalankan.
 
 ## Hasil pengujian
 
@@ -224,7 +235,6 @@ test-visual.mjs     0 temuan di 7 viewport × 5 langkah showcase
 test-overlap.mjs    PASS — FAB tidak menutupi CTA, tetap di bawah dialog
 test-gating.mjs     loop 4 → 0 saat hero off-screen, 0 sisa is-animating
 test-perf.mjs       SEMUA TARGET: p95 < 20 ms, kerja/frame p95 < 8 ms
-verify-test-catches-bug.mjs  ketiga kelas bug terdeteksi
 ```
 
 Rincian: 5 tahap showcase terlewati berurutan saat scroll, bintang menyala 5/5,
@@ -254,17 +264,45 @@ TARGET=http://localhost:8899/index.html LABEL=after  node test-perf.mjs
 Screenshot tiap langkah showcase ada di `screenshots/`, screenshot section di
 `shots/`, hasil pengukuran di `perf/`.
 
+## Perubahan terakhir (2026-11-22)
+
+Yang sudah terverifikasi di salinan repo ini:
+
+- **Warna biru digelapkan** — aksen utama `--blue` di `style.css` dari
+  `#1a73e8` menjadi `#0b57d0` (hover `--blue-d` `#0842a0`, varian terang
+  `--blue-l` kini `#1a73e8`), termasuk glow, avatar testimoni, dan
+  `assets/og-cover.svg`. Biru terang `#7aa9ff` di section gelap sengaja
+  dipertahankan supaya teks tetap terbaca di atas hitam.
+- **Showcase dirombak jadi fully scroll-linked** (`script.js`, commit
+  `88c95ca`) — array `beatFx` dan `basePhone` yang lama (tween berbasis
+  waktu yang dipicu `onUpdate`) dihapus. Semua efek per beat — HP masuk,
+  gelombang NFC, scan QR, bintang menyala, routing, teks beat, ganti view —
+  kini adalah tween di dalam timeline scrub di `initShowcase`: 1 unit waktu
+  = 1 beat, `scrub: 0.15`, Lenis `duration: 0.7`. `setBeat()`/`showView()`
+  sekarang hanya menukar kelas; posisi scroll yang sama = frame yang sama.
+  Ikut diperbaiki: zoom kartu yang dulu salah posisi (baru ~13–17% timeline)
+  kini benar di beat bintang/routing, dan scale kartu dibuat berurutan supaya
+  tidak lompat saat zoom selesai.
+
+> Audit 2026-11-22 menemukan bug lain (preloader tanpa JS, beat 1 hilang saat masuk pin, teks beat hilang di mobile, kontras rendah, FAQ race, dll.) — semuanya sudah diperbaiki di commit perbaikan bug yang sama dengan perubahan ini. Kelas `.no-js` kini dipasang di `<html>` dan diganti jadi `js` oleh `script.js`.
+
 ## Menyesuaikan
 
-**Ganti foto produk** — taruh file di `assets/`, lalu ubah `src` dan `alt` pada
-dua `<img>` di section Bahan. Ukuran tetap `1200×750` agar tidak ada layout shift.
-
-**Warna aksen** — ubah `--blue` di `:root`. Semua biru di halaman mengikuti
-variabel itu, kecuali isi SVG di `assets/`.
+**Warna aksen** — ubah `--blue` di `:root` (`style.css`). Semua biru di halaman
+mengikuti variabel itu; `--blue-d` untuk hover, `--blue-l` untuk varian terang.
+Isi SVG di `assets/` (mis. `og-cover.svg`) memakai warna hardcode dan harus
+diubah manual kalau aksen diganti.
 
 **Jumlah paket** — tambah/hapus `<article class="plan">`. Badge "Paling populer"
 pakai kelas `.plan--pro`.
 
 **Tahap showcase** — tambah `<article class="beat">`, sesuaikan `data-dot` di
-`#showcaseDots`, dan tambah efeknya di array `beatFx` pada `script.js`. Jumlah tahap
-ikut terbaca otomatis dari banyaknya `.beat`.
+`#showcaseDots`. Jumlah tahap ikut terbaca otomatis dari banyaknya `.beat`.
+Efek per beat **bukan** lagi array `beatFx` (sudah dihapus di commit `88c95ca`) —
+tambah efek baru sebagai tween di dalam timeline scrub di `initShowcase`
+(`script.js`), di posisi beat yang bersangkutan, misalnya
+`tl.fromTo(phone, {...}, {...}, 1)` untuk beat 1 atau
+`tl.fromTo(qrScan, {...}, {...}, 2.1)` untuk beat 2. Satu unit waktu timeline
+= satu beat, jadi posisi `0` = beat 0, `1` = beat 1, dan seterusnya.
+`setBeat()`/`showView()` hanya menukar kelas dan jangan dipakai untuk
+animasi berbasis waktu — itu yang dulu bikin scroll terasa tidak smooth.
