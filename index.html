@@ -1,14 +1,14 @@
 <!doctype html>
-<html lang="id">
+<html lang="id" class="no-js">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" viewport-fit=cover" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#000000" />
 
 <title>Google Card Review — Kartu NFC + QR Code untuk Kumpulkan Ulasan Google</title>
 <meta name="description" content="Google Card Review adalah kartu NFC + QR code untuk mengarahkan pelanggan agar memberi ulasan Google. Rating 4–5 bintang dikirim ke Google Review, rating rendah masuk ke WhatsApp Anda. Mulai Rp 50.000/pcs, selesai 2 hari kerja." />
-<meta name="keywords" content="kartu NFC ulasan, QR code ulasan Google, Google Review, kartu review, NFC restaurant, DEVICE card untuk GOOGLE REVIEW, printing kartu NFC" />
-<link rel="canonical" href="https://example.com/" />
+<meta name="keywords" content="google card review, kartu nfc, qr code, ulasan google, kartu ulasan" />
+<link rel="canonical" href="https://web-card-iota.vercel.app/" />
 <meta name="robots" content="index, follow, max-image-preview:large" />
 
 <!-- Open Graph -->
@@ -17,18 +17,21 @@
 <meta property="og:site_name" content="Google Card Review" />
 <meta property="og:title" content="Google Card Review — Satu tap, ulasan Google naik sendiri." />
 <meta property="og:description" content="Kartu NFC + QR code yang mengubah pelanggan menjadi ulasan Google. Rating bagus ke Google, rating jelek ke WhatsApp Anda. Mulai Rp 50.000/pcs." />
-<meta property="og:url" content="https://example.com/" />
-<meta property="og:image" content="assets/og-cover.svg" />
+<meta property="og:url" content="https://web-card-iota.vercel.app/" />
+<meta property="og:image" content="https://web-card-iota.vercel.app/assets/og-cover.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:type" content="image/png" />
 <meta property="og:image:alt" content="Kartu Google Card Review dengan kode QR dan logo NFC" />
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Google Card Review — Satu tap, ulasan Google naik sendiri." />
 <meta name="twitter:description" content="Kartu NFC + QR code untuk mengumpulkan ulasan Google secara otomatis." />
-<meta name="twitter:image" content="assets/og-cover.svg" />
+<meta name="twitter:image" content="https://web-card-iota.vercel.app/assets/og-cover.png" />
 
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
-<link rel="apple-touch-icon" href="assets/favicon.svg" />
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
 <link rel="stylesheet" href="style.css" />
 
 <script type="application/ld+json">
@@ -37,6 +40,8 @@
   "@type": "Product",
   "name": "Google Card Review",
   "description": "Kartu NFC + QR code untuk mengumpulkan ulasan Google secara otomatis di tempat usaha.",
+  "image": "https://web-card-iota.vercel.app/assets/og-cover.png",
+  "url": "https://web-card-iota.vercel.app/",
   "category": "Peralatan pemasaran usaha",
   "brand": { "@type": "Brand", "name": "Google Card Review" },
   "offers": [
@@ -65,17 +70,32 @@
     {
       "@type": "Question",
       "name": "Apakah pelanggan perlu memasang aplikasi?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Tidak. NFC dan QR bekerja langsung dari browser bawaan HP. Pelanggan cukup tap atau scan, lalu mengetik opsional satu kalimat." }
+      "acceptedAnswer": { "@type": "Answer", "text": "Tidak. NFC dan QR bekerja langsung dari browser bawaan HP. Pelanggan cukup tap atau memotret kode, lalu mengetik satu kalimat jika mau. Tidak ada akun, tidak ada unduhan." }
     },
     {
       "@type": "Question",
-      "name": "Bagaimana rating rendah ditangani?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Rating 4 dan 5 bintang diarahkan ke halaman Google Review. Rating 3 ke bawah dialihkan ke WhatsApp Anda sebagai feedback internal." }
+      "name": "Bagaimana cara menangani rating 1 dan 2 bintang?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Rating 4 dan 5 bintang diarahkan ke halaman Google Review Anda. Rating 3 ke bawah dialihkan ke WhatsApp Anda, jadi Anda menerima feedback tanpa profil publik Anda ternoda." }
     },
     {
       "@type": "Question",
-      "name": "Berapa lama pengerjaannya?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Dua hari kerja setelah design disetujui, untuk jumlah 100 pcs atau lebih." }
+      "name": "Apakah HP semua orang bisa dipakai?",
+      "acceptedAnswer": { "@type": "Answer", "text": "NFC membutuhkan iPhone 7 ke atas atau Android dengan NFC aktif. Untuk HP tanpa NFC, kartu tetap punya QR code di bagian yang sama — jadi tidak ada pelanggan yang terkunci." }
+    },
+    {
+      "@type": "Question",
+      "name": "Berapa lama pengerjaannya dan bagaimana pembayarannya?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Proses 2 hari kerja setelah design disetujui dan pembayaran diterima. Pembayaran lewat transfer BCA atau QRIS. Pengiriman dikirim ke alamat yang Anda berikan." }
+    },
+    {
+      "@type": "Question",
+      "name": "Kuota tap 100.000 itu untuk apa?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Setiap kali pelanggan tap atau scan, satu kuota terpakai. Paket Basic menyediakan 100.000 tap, Pro 200.000 tap. Pada pemakaian normal satu outlet, kuota ini bertahan bertahun-tahun." }
+    },
+    {
+      "@type": "Question",
+      "name": "Apakah bisa untuk klinik, salon, atau bengkel?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Bisa. Kartu ini dipakai di cafe dan restoran, klinik dan praktik, salon dan studio, bengkel, hotel, serta toko ritel. Yang dibutuhkan hanya satu Listing Google Business yang sudah aktif." }
     }
   ]
 }
@@ -163,7 +183,7 @@
     </nav>
 
     <div class="nav__actions">
-      <button class="btn btn--pill btn--primary btn--sm" type="button" data-order>Pesan</button>
+      <a class="btn btn--pill btn--primary btn--sm" href="https://wa.me/6288212725000?text=Halo%2C%20saya%20mau%20pesan%20Google%20Card%20Review" data-order>Pesan</a>
       <button class="nav__burger" type="button" id="burger" aria-label="Buka menu" aria-expanded="false" aria-controls="mobileMenu">
         <span></span><span></span>
       </button>
@@ -179,7 +199,7 @@
     <a href="#harga">Harga</a>
     <a href="#faq">FAQ</a>
   </nav>
-  <button class="btn btn--pill btn--primary" type="button" data-order>Pesan Sekarang</button>
+  <a class="btn btn--pill btn--primary" href="https://wa.me/6288212725000?text=Halo%2C%20saya%20mau%20pesan%20Google%20Card%20Review" data-order>Pesan Sekarang</a>
   <a class="mobile-menu__wa" data-wa href="https://wa.me/6288212725000" rel="noopener">
     <svg viewBox="0 0 24 24" aria-hidden="true" width="18" height="18"><use href="#i-wa" /></svg>
     Chat via WhatsApp
@@ -208,7 +228,7 @@
         </p>
 
         <div class="hero__cta" data-anim="fade-up" data-delay="0.45">
-          <button class="btn btn--pill btn--primary" type="button" data-order data-ripple>Pesan Sekarang</button>
+          <a class="btn btn--pill btn--primary" href="https://wa.me/6288212725000?text=Halo%2C%20saya%20mau%20pesan%20Google%20Card%20Review" data-order data-ripple>Pesan Sekarang</a>
           <a class="link-arrow" href="#cara-kerja" data-magnetic>
             Lihat cara kerja <span aria-hidden="true">&rsaquo;</span>
           </a>
@@ -314,13 +334,13 @@
                 <div class="phone__view is-active" data-view="google">
                   <div class="gsearch">
                     <span class="gsearch__mark"><svg viewBox="0 0 48 48"><use href="#g-mark" /></svg></span>
-                    <span class="gsearch__q">Nama Usaha Anda</span>
+                    <span class="gsearch__q">Kopi Senja</span>
                   </div>
                   <div class="gcard">
                     <div class="gcard__row">
                       <span class="gcard__avatar"></span>
                       <span class="gcard__id">
-                        <span class="gcard__name">Nama Usaha Anda</span>
+                        <span class="gcard__name">Kopi Senja</span>
                         <span class="gcard__cat">Restoran &amp; Kafe</span>
                       </span>
                     </div>
@@ -341,11 +361,11 @@
                 <div class="phone__view" data-view="rating">
                   <p class="ph-title">Seberapa puas pengalaman Anda?</p>
                   <div class="ph-stars" id="phStars">
-                    <button class="ph-star" type="button" tabindex="-1" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#i-star" /></svg></button>
-                    <button class="ph-star" type="button" tabindex="-1" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#i-star" /></svg></button>
-                    <button class="ph-star" type="button" tabindex="-1" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#i-star" /></svg></button>
-                    <button class="ph-star" type="button" tabindex="-1" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#i-star" /></svg></button>
-                    <button class="ph-star" type="button" tabindex="-1" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#i-star" /></svg></button>
+                    <button class="ph-star" type="button"><svg viewBox="0 0 24 24"><use href="#i-star" /></svg></button>
+                    <button class="ph-star" type="button"><svg viewBox="0 0 24 24"><use href="#i-star" /></svg></button>
+                    <button class="ph-star" type="button"><svg viewBox="0 0 24 24"><use href="#i-star" /></svg></button>
+                    <button class="ph-star" type="button"><svg viewBox="0 0 24 24"><use href="#i-star" /></svg></button>
+                    <button class="ph-star" type="button"><svg viewBox="0 0 24 24"><use href="#i-star" /></svg></button>
                   </div>
                   <p class="ph-hint" id="phHint">Ketuk untuk memberi rating</p>
                 </div>
@@ -409,12 +429,12 @@
             </article>
           </div>
 
-          <div class="showcase__dots" id="showcaseDots" role="tablist" aria-label="Tahapan produk">
-            <button type="button" role="tab" aria-selected="true" aria-label="Tahap 1" data-dot="0"></button>
-            <button type="button" role="tab" aria-selected="false" aria-label="Tahap 2" data-dot="1"></button>
-            <button type="button" role="tab" aria-selected="false" aria-label="Tahap 3" data-dot="2"></button>
-            <button type="button" role="tab" aria-selected="false" aria-label="Tahap 4" data-dot="3"></button>
-            <button type="button" role="tab" aria-selected="false" aria-label="Tahap 5" data-dot="4"></button>
+          <div class="showcase__dots" id="showcaseDots" role="group" aria-label="Langkah cara kerja">
+            <button type="button" aria-selected="true" aria-label="Tampilkan langkah 1" data-dot="0"></button>
+            <button type="button" aria-selected="false" aria-label="Tampilkan langkah 2" data-dot="1"></button>
+            <button type="button" aria-selected="false" aria-label="Tampilkan langkah 3" data-dot="2"></button>
+            <button type="button" aria-selected="false" aria-label="Tampilkan langkah 4" data-dot="3"></button>
+            <button type="button" aria-selected="false" aria-label="Tampilkan langkah 5" data-dot="4"></button>
           </div>
         </div>
       </div>
@@ -559,6 +579,7 @@
           <p class="stat__label">Pengerjaan fisik setelah design disetujui</p>
         </div>
       </div>
+      <p class="note note--dark">Testimoni dan angka di halaman ini masih contoh — ganti dengan testimoni dan data asli pelanggan.</p>
       <div class="split" data-split-card>
         <div class="split__side split__side--good">
           <span class="split__badge"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-check" /></svg> 4 &amp; 5 bintang</span>
@@ -586,6 +607,7 @@
         <p class="eyebrow" data-anim="fade-up">Testimoni</p>
         <h2 class="h2" id="testiTitle" data-split>Pemilik usaha sudah pakai.</h2>
       </header>
+        <p class="note">Testimoni dan angka di halaman ini masih contoh — ganti dengan testimoni dan data asli pelanggan.</p>
     </div>
 
     <div class="marquee" data-marquee>
@@ -658,7 +680,7 @@
             <li><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-check" /></svg> Routing 4–5&#9733; ke Google, sisanya ke WA</li>
             <li><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-check" /></svg> Pengerjaan 2 hari kerja</li>
           </ul>
-          <button class="btn btn--pill btn--ghost btn--wide" type="button" data-order data-plan-name="Basic" data-ripple>Pilih Basic</button>
+          <a class="btn btn--pill btn--ghost btn--wide" href="https://wa.me/6288212725000?text=Halo%2C%20saya%20mau%20pesan%20Google%20Card%20Review%20%28Basic%29" data-order data-plan-name="Basic" data-ripple>Pilih Basic</a>
         </article>
 
         <article class="plan plan--pro" data-plan>
@@ -673,7 +695,7 @@
             <li><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-check" /></svg> Halaman ulasan multi-cabang</li>
             <li><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-check" /></svg> Prioritas pengerjaan 1 hari kerja</li>
           </ul>
-          <button class="btn btn--pill btn--primary btn--wide" type="button" data-order data-plan-name="Pro" data-ripple>Pilih Pro</button>
+          <a class="btn btn--pill btn--primary btn--wide" href="https://wa.me/6288212725000?text=Halo%2C%20saya%20mau%20pesan%20Google%20Card%20Review%20%28Pro%29" data-order data-plan-name="Pro" data-ripple>Pilih Pro</a>
         </article>
 
         <article class="plan" data-plan>
@@ -782,7 +804,7 @@
           </h3>
           <div class="faq__a" id="faq6" role="region">
             <div class="faq__a-inner">
-              <p>Bisa. kartu ini dipakai di cafe dan restoran, klinik dan praktik, salon dan studio, bengkel, hotel, serta toko ritel. Yang dibutuhkan hanya satu Listing Google Business yang sudah aktif.</p>
+              <p>Bisa. Kartu ini dipakai di cafe dan restoran, klinik dan praktik, salon dan studio, bengkel, hotel, serta toko ritel. Yang dibutuhkan hanya satu Listing Google Business yang sudah aktif.</p>
             </div>
           </div>
         </div>
@@ -799,7 +821,7 @@
       </h2>
 
       <div class="closing__cta" data-anim="fade-up">
-        <button class="btn btn--pill btn--primary" type="button" data-order data-ripple>Pesan Sekarang</button>
+        <a class="btn btn--pill btn--primary" href="https://wa.me/6288212725000?text=Halo%2C%20saya%20mau%20pesan%20Google%20Card%20Review" data-order data-ripple>Pesan Sekarang</a>
         <a class="link-arrow link-arrow--light" href="https://wa.me/6288212725000" data-wa data-msg="Halo Google Card Review, saya mau tanya soal kartu NFC." rel="noopener" data-magnetic>
           Atau tanya via WhatsApp <span aria-hidden="true">&rsaquo;</span>
         </a>
@@ -851,7 +873,7 @@
 
     <div class="footer__col">
       <h2 class="footer__h">Pesan</h2>
-      <button class="btn btn--pill btn--primary btn--sm" type="button" data-order data-ripple>Pesan Sekarang</button>
+      <a class="btn btn--pill btn--primary btn--sm" href="https://wa.me/6288212725000?text=Halo%2C%20saya%20mau%20pesan%20Google%20Card%20Review" data-order data-ripple>Pesan Sekarang</a>
       <a class="footer__wa" data-wa href="https://wa.me/6288212725000" rel="noopener">
         <svg viewBox="0 0 24 24" aria-hidden="true" width="18" height="18"><use href="#i-wa" /></svg>
         WhatsApp
@@ -879,7 +901,7 @@
 
     <p class="eyebrow">Form pemesanan</p>
     <h2 class="modal__title" id="orderTitle">Pesan Google Card Review</h2>
-    <p class="modal__sub">Isi singkat, lalu kami kirim ke WhatsApp Anda dengan pesan yang sudah terisi.</p>
+    <p class="modal__sub">Isi singkat, lalu pesanmu terkirim ke WhatsApp kami (penjual) dengan pesan yang sudah terisi.</p>
 
     <div class="field">
       <label for="ofName">Nama Anda</label>
