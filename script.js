@@ -23,7 +23,7 @@
   const hasGSAP = typeof window.gsap !== 'undefined' && typeof window.ScrollTrigger !== 'undefined';
   const hasLenis = typeof window.Lenis !== 'undefined';
 
-  doc.documentElement.classList.add('js');
+  doc.documentElement.classList.replace('no-js', 'js');
 
   /* ---------- UTILITAS ---------- */
   const clamp = (v, a, b) => Math.min(Math.max(v, a), b);
@@ -40,6 +40,7 @@
      Kata setelah `mutedFrom` diberi kelas .word--muted supaya pembedaan
      visual (mis. dua warna di headline) tetap terjaga. */
   function splitWords(el, mutedFrom = Infinity) {
+    if (!el) return [];
     if (el.dataset.splitDone) return $$('.word__i', el);
     const words = el.textContent.trim().split(/\s+/);
     el.textContent = '';
@@ -337,9 +338,9 @@
        di setiap event mouse. Di-cache, dan hanya di-refresh saat pointer
        masuk atau layout berubah. */
     if (stage && card && !window.matchMedia('(hover: none)').matches) {
-      const qx = gsap.quickTo(card, 'rotationX', { duration: 0.7, ease: 'power3.out' });
-      const qy = gsap.quickTo(card, 'rotationY', { duration: 0.7, ease: 'power3.out' });
-      const qy2 = gsap.quickTo(card, 'y', { duration: 0.9, ease: 'power3.out' });
+      const qx = gsap.quickTo(card, 'rotationX', { duration: 0.7, ease: 'power3.out', overwrite: 'auto' });
+      const qy = gsap.quickTo(card, 'rotationY', { duration: 0.7, ease: 'power3.out', overwrite: 'auto' });
+      const qy2 = gsap.quickTo(card, 'y', { duration: 0.9, ease: 'power3.out', overwrite: 'auto' });
 
       let rect = null;
       const cacheRect = () => { rect = stage.getBoundingClientRect(); };
@@ -409,6 +410,7 @@
 
     /* keyboard: kiri/kanan pindah beat saat showcase di viewport */
     section.addEventListener('keydown', (e) => {
+      if (!hasGSAP) return;
       if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
       const st = ScrollTrigger.getById('showcaseST');
       if (!st || !st.isActive) return;
@@ -426,7 +428,9 @@
       titleWords.forEach((w) => w.classList.add('is-lit'));
       if (card) card.style.transform = 'perspective(1200px) rotateX(8deg) rotateY(-14deg)';
       if (phone) phone.style.opacity = 1;
-      views.forEach((v) => v.classList.add('is-active'));
+      /* hanya view pertama yang aktif: view lain absolute inset 0,
+         kalau semuanya is-active ketiganya menumpuk dan saling menimpa */
+      views[0]?.classList.add('is-active');
       phStars.forEach((s) => s.classList.add('is-lit'));
       return;
     }
@@ -523,8 +527,15 @@
       const beatViews = ['google', 'google', 'google', 'rating', 'route'];
       beats.forEach((b, i) => {
         tl.call(() => { setBeat(i); showView(beatViews[i]); }, [], i);
-        tl.fromTo(b, { autoAlpha: 0, y: 24 },
-          { autoAlpha: 1, y: 0, duration: 0.35, ease: 'power2.out' }, i);
+        /* beat 0 JANGAN diberi fromTo entry: beat 0 sudah terlihat via
+           gsap.set(beats[0], { autoAlpha: 1 }) + .is-active, dan fromTo
+           punya immediateRender sehingga langsung merendernya ke
+           autoAlpha 0 saat timeline dibuat — beat 1 hilang sampai
+           scroll ~7% ke dalam pin. Beat >0 tetap pakai fromTo. */
+        if (i > 0) {
+          tl.fromTo(b, { autoAlpha: 0, y: 24 },
+            { autoAlpha: 1, y: 0, duration: 0.35, ease: 'power2.out' }, i);
+        }
         if (i < nBeats - 1) {
           tl.to(b, { autoAlpha: 0, y: -16, duration: 0.25, ease: 'power2.in' }, i + 0.7);
         }
@@ -562,8 +573,11 @@
       /* beat 4 — routing: 4-5 bintang ke Google, 1-3 ke WhatsApp */
       tl.to(phone, { rotate: 0, duration: 0.3, ease: 'power2.out' }, 4);
       tl.call(() => phStars.forEach((s, si) => { if (si < 2) s.classList.remove('is-lit'); }), [], 4);
-      tl.fromTo(views.find((v) => v.dataset.view === 'route'),
-        { scale: 0.94 }, { scale: 1, duration: 0.4, ease: 'back.out(1.4)' }, 4.05);
+      const routeView = views.find((v) => v.dataset.view === 'route');
+      if (routeView) {
+        tl.fromTo(routeView,
+          { scale: 0.94 }, { scale: 1, duration: 0.4, ease: 'back.out(1.4)' }, 4.05);
+      }
       tl.to(phStars, { scale: 0.72, color: '#d2d2d7', duration: 0.25, stagger: 0.05, ease: 'power2.out' }, 4.1);
 
       return () => {
@@ -643,7 +657,7 @@
      ======================================================================= */
   function initReveals() {
     if (REDUCED || !hasGSAP) {
-      $$('[data-anim], [data-bento], [data-step], [data-plan], [data-split-card]').forEach((el) => {
+      $$('[data-anim], [data-bento], [data-step], [data-plan], [data-split-card], [data-stat]').forEach((el) => {
         el.style.opacity = 1; el.style.transform = 'none';
       });
       $$('[data-split]').forEach((el) => splitWords(el).forEach((w) => {
@@ -691,7 +705,11 @@
     });
     gsap.set('[data-bento]', { y: 34 });
 
-    /* blok statistik: stagger per kolom + garis pemisah ikut tumbuh */
+    /* blok statistik: stagger per kolom. Tween scaleX lama DIHAPUS:
+       $('.stat', b) selalu null (b SUDAH .stat), jadi yang di-scaleX
+       adalah seluruh blok stat (angka + label ikut terjepit), bukan
+       garis pemisah — di markup .stat tidak ada elemen garis terpisah,
+       pemisahnya hanya border-top CSS di .stat. */
     ScrollTrigger.batch('[data-stat]', {
       start: 'top 88%',
       once: true,
@@ -699,9 +717,6 @@
         gsap.to(batch, {
           y: 0, opacity: 1, duration: 0.9, stagger: 0.1, ease: 'power3.out', overwrite: true,
         });
-        gsap.fromTo(batch.map((b) => $('.stat', b) || b),
-          { scaleX: 0, transformOrigin: 'left' },
-          { scaleX: 1, duration: 0.9, stagger: 0.1, ease: 'power2.out' });
       },
     });
     gsap.set('[data-stat]', { y: 30 });
@@ -880,16 +895,22 @@
 
     function openPanel(panel) {
       if (REDUCED || !hasGSAP) { panel.style.height = 'auto'; return; }
+      /* bunuh tween lama dulu: tanpa ini, onComplete tween buka yang
+         masih berjalan bisa memaksa height 'auto' setelah panel
+         ditutup (race klik cepat) — panel tertutup terbuka lagi sendiri */
+      const inner = $('.faq__a-inner', panel);
+      gsap.killTweensOf([panel, inner]);
       gsap.set(panel, { height: 'auto' });
       const h = panel.offsetHeight;
-      gsap.fromTo(panel, { height: 0 }, { height: h, duration: 0.55, ease: 'power3.inOut',
+      gsap.fromTo(panel, { height: 0 }, { height: h, duration: 0.55, ease: 'power3.inOut', overwrite: true,
         onComplete: () => { panel.style.height = 'auto'; } });
-      gsap.fromTo($('.faq__a-inner', panel), { y: 14, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.5, ease: 'power2.out', delay: 0.08 });
+      gsap.fromTo(inner, { y: 14, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.5, ease: 'power2.out', delay: 0.08, overwrite: true });
     }
     function closePanel(panel) {
       if (REDUCED || !hasGSAP) { panel.style.height = '0px'; return; }
-      gsap.to(panel, { height: 0, duration: 0.45, ease: 'power3.inOut' });
+      gsap.killTweensOf(panel);
+      gsap.to(panel, { height: 0, duration: 0.45, ease: 'power3.inOut', overwrite: true });
     }
   }
 
@@ -897,7 +918,7 @@
      10. MICRO-INTERACTION: ripple + magnetic
      ======================================================================= */
   function initMicroInteractions() {
-    if (REDUCED) return;
+    if (REDUCED || !hasGSAP) return;
 
     /* ripple — hanya bila koordinat-pointer tersedia (mouse), bukan ketukan sentuh */
     $$('[data-ripple]').forEach((el) => {
@@ -956,7 +977,11 @@
       }
     };
 
-    $$('[data-order]').forEach((b) => b.addEventListener('click', () => open(b.dataset.planName)));
+    /* preventDefault: setelah tombol Pesan jadi <a href="https://wa.me/...">
+       (agen HTML), tanpa JS link WA tetap jalan sebagai fallback; dengan
+       JS, klik dicegat dan modal yang terbuka. Pada <button> lama pun
+       preventDefault ini tidak berpengaruh. */
+    $$('[data-order]').forEach((b) => b.addEventListener('click', (e) => { e.preventDefault(); open(b.dataset.planName); }));
     close?.addEventListener('click', () => modal.close());
     modal.addEventListener('click', (e) => { if (e.target === modal) modal.close(); });
 
