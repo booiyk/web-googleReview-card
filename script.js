@@ -219,7 +219,7 @@
   function initLenis() {
     if (REDUCED || !hasLenis) return;
     const lenis = new Lenis({
-      duration: 1.05,
+      duration: 0.85,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
       touchMultiplier: 1.6,
@@ -448,9 +448,9 @@
       beats.forEach((b, bi) => {
         if (bi === i) {
           gsap.fromTo(b, { autoAlpha: 0, y: 24 },
-            { autoAlpha: 1, y: 0, duration: 0.5, ease: 'power3.out', overwrite: true });
+            { autoAlpha: 1, y: 0, duration: 0.35, ease: 'power3.out', overwrite: true });
         } else if (bi === i - 1) {
-          gsap.to(b, { autoAlpha: 0, y: -16, duration: 0.32, ease: 'power2.in', overwrite: 'auto' });
+          gsap.to(b, { autoAlpha: 0, y: -16, duration: 0.22, ease: 'power2.in', overwrite: 'auto' });
         } else {
           gsap.set(b, { autoAlpha: 0 });
         }
@@ -502,11 +502,11 @@
         showView('google');
         gsap.fromTo(phone,
           { autoAlpha: 0, y: 90, rotate: 10, scale: 0.82 },
-          { autoAlpha: 1, y: 0, rotate: -5, scale: 1, duration: 1.1, ease: 'power3.out', overwrite: 'auto' });
+          { autoAlpha: 1, y: 0, rotate: -5, scale: 1, duration: 0.75, ease: 'power3.out', overwrite: 'auto' });
         waves.forEach((w, i) => {
           gsap.fromTo(w,
             { scale: 0.3, opacity: 0.9 },
-            { scale: 5.4, opacity: 0, duration: 1.6, ease: 'power2.out', repeat: 3, delay: i * 0.28, overwrite: true });
+            { scale: 5.4, opacity: 0, duration: 1.1, ease: 'power2.out', repeat: 3, delay: i * 0.28, overwrite: true });
         });
         gsap.to($('#showcaseCard .card__nfc'), { opacity: 0.2, duration: 0.6, yoyo: true, repeat: 3, overwrite: 'auto' });
       },
@@ -518,7 +518,7 @@
         gsap.set(waves, { scale: 0.3, opacity: 0 });
         gsap.fromTo(qrScan,
           { opacity: 0, y: 0 },
-          { opacity: 1, y: 250, duration: 1.05, ease: 'power1.inOut', repeat: 1, overwrite: true });
+          { opacity: 1, y: 250, duration: 0.7, ease: 'power1.inOut', repeat: 1, overwrite: true });
         gsap.to(qrScan, { opacity: 0, duration: 0.3, delay: 2.1, overwrite: false });
       },
 
@@ -576,7 +576,7 @@
           end: `+=${nBeats * 95}%`,
           pin,
           pinSpacing: true,
-          scrub: 0.8,
+          scrub: 0.3,
           anticipatePin: 1,
           invalidateOnRefresh: true,
           onUpdate: (self) => {
