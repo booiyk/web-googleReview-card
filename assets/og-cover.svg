@@ -4,7 +4,7 @@
       <stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#f5f5f7"/>
     </linearGradient>
     <radialGradient id="glow" cx=".78" cy=".42" r=".55">
-      <stop offset="0" stop-color="#1a73e8" stop-opacity=".2"/><stop offset="1" stop-color="#1a73e8" stop-opacity="0"/>
+      <stop offset="0" stop-color="#0b57d0" stop-opacity=".2"/><stop offset="1" stop-color="#0b57d0" stop-opacity="0"/>
     </radialGradient>
     <filter id="ds" x="-40%" y="-40%" width="180%" height="180%">
       <feDropShadow dx="0" dy="22" stdDeviation="24" flood-color="#000" flood-opacity=".16"/>
@@ -25,7 +25,7 @@
   <text x="90" y="348" font-family="-apple-system,Helvetica,Arial" font-size="70" font-weight="700" fill="#86868b" letter-spacing="-2">Ulasan Google naik sendiri.</text>
   <text x="90" y="410" font-family="-apple-system,Helvetica,Arial" font-size="27" fill="#6e6e73">Kartu NFC + QR code. Rating 4–5 ke Google, sisanya ke WhatsApp Anda.</text>
   <g transform="translate(90 452)">
-    <rect width="240" height="60" rx="30" fill="#1a73e8"/>
+    <rect width="240" height="60" rx="30" fill="#0b57d0"/>
     <text x="120" y="39" text-anchor="middle" font-family="-apple-system,Helvetica,Arial" font-size="22" font-weight="600" fill="#fff">Mulai Rp 50.000</text>
   </g>
   <g filter="url(#ds)" transform="translate(730 200) rotate(-7 190 110)">
