@@ -219,7 +219,7 @@
   function initLenis() {
     if (REDUCED || !hasLenis) return;
     const lenis = new Lenis({
-      duration: 0.85,
+      duration: 0.7,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
       touchMultiplier: 1.6,
@@ -444,17 +444,11 @@
       const lit = Math.max(1, Math.round(((i + 1) / nBeats) * titleWords.length));
       titleWords.forEach((w, wi) => w.classList.toggle('is-lit', wi < lit));
 
-      /* teks beat: slide + fade, hanya dua beat terakhir yang terlihat */
-      beats.forEach((b, bi) => {
-        if (bi === i) {
-          gsap.fromTo(b, { autoAlpha: 0, y: 24 },
-            { autoAlpha: 1, y: 0, duration: 0.35, ease: 'power3.out', overwrite: true });
-        } else if (bi === i - 1) {
-          gsap.to(b, { autoAlpha: 0, y: -16, duration: 0.22, ease: 'power2.in', overwrite: 'auto' });
-        } else {
-          gsap.set(b, { autoAlpha: 0 });
-        }
-      });
+      /* ROMBAK: teks beat TIDAK lagi dianimasikan di sini dengan tween
+         berbasis waktu. Geraknya kini milik timeline scrub di bawah
+         (fromTo autoAlpha/y per beat), jadi scroll maju/mundur selalu
+         deterministik dan tidak pernah ketinggalan. Fungsi ini hanya
+         menukar kelas .is-active, dot, dan kata headline yang menyala. */
     };
 
     /* Hanya satu view layar yang boleh terlihat pada satu waktu.
@@ -464,95 +458,17 @@
        ditinggalkan langsung dipaksa autoAlpha 0 (tween-nya dibunuh
        dulu) sebelum view baru ditampilkan. */
     const showView = (name) => {
-      views.forEach((v) => {
-        if (v.dataset.view === name) return;
-        v.classList.remove('is-active');
-        gsap.killTweensOf(v);
-        gsap.set(v, { autoAlpha: 0, scale: 1 });
-      });
-      const next = views.find((v) => v.dataset.view === name);
-      if (next) {
-        next.classList.add('is-active');
-        gsap.set(next, { autoAlpha: 1 });
-      }
+      views.forEach((v) => v.classList.toggle('is-active', v.dataset.view === name));
     };
 
-    /* Pose dasar HP. Effect tiap beat boleh menimpa, tapi state dasar
-       ini dipasang ulang setiap beat supaya deep-link atau scroll cepat
-       tidak meninggalkan HP dalam kondisi tak terlihat. */
-    const basePhone = (visible) => {
-      if (visible) {
-        gsap.set(phone, { autoAlpha: 1, scale: 1, y: 0, rotate: -5 });
-      } else {
-        gsap.set(phone, { autoAlpha: 0, scale: 0.85, y: 0, rotate: 0 });
-      }
-    };
-
-    /* efek per beat */
-    const beatFx = [
-      /* 01 — kartu di meja, HP belum muncul */
-      () => {
-        basePhone(false);
-        showView('google');
-        gsap.set(waves, { scale: 0.3, opacity: 0 });
-      },
-
-      /* 02 — HP mendekat, gelombang NFC berdenyut */
-      () => {
-        showView('google');
-        gsap.fromTo(phone,
-          { autoAlpha: 0, y: 90, rotate: 10, scale: 0.82 },
-          { autoAlpha: 1, y: 0, rotate: -5, scale: 1, duration: 0.75, ease: 'power3.out', overwrite: 'auto' });
-        waves.forEach((w, i) => {
-          gsap.fromTo(w,
-            { scale: 0.3, opacity: 0.9 },
-            { scale: 5.4, opacity: 0, duration: 1.1, ease: 'power2.out', repeat: 3, delay: i * 0.28, overwrite: true });
-        });
-        gsap.to($('#showcaseCard .card__nfc'), { opacity: 0.2, duration: 0.6, yoyo: true, repeat: 3, overwrite: 'auto' });
-      },
-
-      /* 03 — scan QR, garis cahaya melintas */
-      () => {
-        showView('google');
-        gsap.set(phone, { rotate: 4, overwrite: 'auto' });
-        gsap.set(waves, { scale: 0.3, opacity: 0 });
-        gsap.fromTo(qrScan,
-          { opacity: 0, y: 0 },
-          { opacity: 1, y: 250, duration: 0.7, ease: 'power1.inOut', repeat: 1, overwrite: true });
-        gsap.to(qrScan, { opacity: 0, duration: 0.3, delay: 2.1, overwrite: false });
-      },
-
-      /* 04 — layar rating, bintang menyala satu per satu */
-      () => {
-        showView('rating');
-        gsap.set(phone, { rotate: -4, overwrite: 'auto' });
-        phStars.forEach((s, i) => {
-          s.classList.add('is-lit');
-          /* beat 05 menulis colorAbu secara INLINE; inline mengalahkan
-             kelas .is-lit, jadi harus dibersihkan di sini supaya
-             bintang benar-benar menyala lagi saat user scroll balik. */
-          gsap.set(s, { clearProps: 'color' });
-          gsap.fromTo(s, { scale: 0.45 },
-            { scale: 1, duration: 0.32, delay: 0.1 + i * 0.15, ease: 'back.out(3)', overwrite: 'auto' });
-        });
-        gsap.fromTo(phHint, { opacity: 0.4 }, { opacity: 1, duration: 0.6, delay: 1.05, overwrite: 'auto' });
-      },
-
-      /* 05 — routing: 4–5 bintang ke Google, 1–3 ke WhatsApp */
-      () => {
-        showView('route');
-        const routeView = views.find((v) => v.dataset.view === 'route');
-        if (routeView) {
-          gsap.fromTo(routeView,
-            { scale: 0.94 }, { scale: 1, duration: 0.55, ease: 'back.out(1.4)', overwrite: true });
-        }
-        phStars.forEach((s, i) => {
-          if (i < 2) s.classList.remove('is-lit');
-          gsap.to(s, { scale: 0.72, color: '#d2d2d7', duration: 0.3, delay: i * 0.08, overwrite: 'auto' });
-        });
-        gsap.set(phone, { rotate: 0, overwrite: 'auto' });
-      },
-    ];
+    /* ROMBAK 2026-11-22: basePhone + beatFx DIHAPUS. Semua efek per beat
+       (HP masuk, gelombang NFC, scan QR, bintang menyala, routing)
+       sebelumnya adalah tween berbasis WAKTU yang dipicu onUpdate saat
+       progress melewati batas beat — scroll cepat = beberapa tween
+       jalan bersamaan / tertinggal, itulah rasa "tidak smooth".
+       Sekarang semua efek itu adalah tween DI DALAM timeline scrub
+       di bawah, posisinya terikat ke beat (0..4), jadi gerak = fungsi
+       posisi scroll, bukan fungsi waktu sejak beat berganti. */
 
     /* =============================================================
        DESKTOP: timeline ter-pin. Kartu berputar 360°, zoom, ganti
@@ -565,9 +481,17 @@
     mq.add('(min-width: 941px)', () => {
       gsap.set(card, { transformPerspective: 1200, transformOrigin: '50% 50%' });
 
-      const state = { i: 0 };
-      const step = 1 / nBeats;
-
+      /* ROMBAK: timeline 100% scroll-linked, 1 unit waktu = 1 beat.
+         - scrub 0.15 (dulu 0.8): kartu hampir 1:1 mengikuti scroll,
+           sisa 0.15 hanya meredam langkah wheel supaya tidak bergetar.
+         - TIDAK ADA lagi onUpdate -> setBeat/beatFx. Semua gerak ada
+           di timeline ini, jadi scroll bolak-balik pun deterministik:
+           posisi scroll yang sama = frame yang sama, tidak ada tween
+           waktu yang tertinggal atau menumpuk.
+         - BUG LAMA yang ikut diperbaiki: zoom kartu dulu dipasang di
+           posisi 3*step (0.65) dan 4*step (0.85) — itu baru ~13-17%
+           timeline, bukan beat 3/4. Sekarang zoom di posisi 3.2 dan
+           4.2, benar-benar saat beat bintang dan routing. */
       const tl = gsap.timeline({
         scrollTrigger: {
           id: 'showcaseST',
@@ -576,27 +500,71 @@
           end: `+=${nBeats * 95}%`,
           pin,
           pinSpacing: true,
-          scrub: 0.3,
+          scrub: 0.15,
           anticipatePin: 1,
           invalidateOnRefresh: true,
-          onUpdate: (self) => {
-            const i = clamp(Math.floor(self.progress * nBeats), 0, nBeats - 1);
-            if (i !== state.i) { state.i = i; setBeat(i); beatFx[i](); }
-          },
         },
       });
 
       /* Kartu berayun ±26° (bukan 360°) supaya QR dan teks kartu selalu
-         menghadap pembaca di setiap beat — 360° membuat kartu(edge-on)
+         menghadap pembaca di setiap beat — 360° membuat kartu (edge-on)
          menghilang beberapa saat. */
-      tl.fromTo(card,
-        { rotateY: -26, rotateX: 9, scale: 0.95 },
-        { rotateY: 26, scale: 1.05, duration: nBeats, ease: 'sine.inOut' }, 0);
+      tl.fromTo(card, { rotateY: -26 }, { rotateY: 26, duration: nBeats, ease: 'sine.inOut' }, 0);
       tl.fromTo(card, { rotateX: 9 }, { rotateX: 4, duration: nBeats, ease: 'sine.inOut' }, 0);
-      tl.to(card, { rotateY: -12, duration: 1.1, ease: 'sine.inOut' }, 4 / nBeats + 0.4);
-      /* zoom saat beat bintang (3) lalu kembali saat routing (4) */
-      tl.to(card, { scale: 1.24, duration: 0.9, ease: 'power2.inOut' }, 3 * step + 0.05);
-      tl.to(card, { scale: 1.04, duration: 0.9, ease: 'power2.inOut' }, 4 * step + 0.05);
+      /* scale dibuat berurutan (bukan tumpang tindih dengan tween
+         rotate di atas) supaya tidak ada lompatan saat zoom selesai:
+         0.95 -> 1.05 selama beat 0-3, zoom 1.24 di beat bintang (3),
+         kembali 1.04 di routing (4). */
+      tl.fromTo(card, { scale: 0.95 }, { scale: 1.05, duration: 3.2, ease: 'sine.inOut' }, 0);
+      tl.to(card, { scale: 1.24, duration: 0.6, ease: 'power2.inOut' }, 3.2);
+      tl.to(card, { scale: 1.04, duration: 0.6, ease: 'power2.inOut' }, 4.2);
+
+      /* --- per beat: kelas + gerak, semuanya di posisi beat-nya --- */
+      const beatViews = ['google', 'google', 'google', 'rating', 'route'];
+      beats.forEach((b, i) => {
+        tl.call(() => { setBeat(i); showView(beatViews[i]); }, [], i);
+        tl.fromTo(b, { autoAlpha: 0, y: 24 },
+          { autoAlpha: 1, y: 0, duration: 0.35, ease: 'power2.out' }, i);
+        if (i < nBeats - 1) {
+          tl.to(b, { autoAlpha: 0, y: -16, duration: 0.25, ease: 'power2.in' }, i + 0.7);
+        }
+      });
+
+      /* beat 0 — kartu di meja, HP belum muncul */
+      tl.set(phone, { autoAlpha: 0, scale: 0.85, y: 0, rotate: 0 }, 0);
+      tl.set(waves, { scale: 0.3, opacity: 0 }, 0);
+      tl.set(qrScan, { opacity: 0, y: 0 }, 0);
+
+      /* beat 1 — HP mendekat, gelombang NFC berdenyut */
+      tl.fromTo(phone,
+        { autoAlpha: 0, y: 90, rotate: 10, scale: 0.82 },
+        { autoAlpha: 1, y: 0, rotate: -5, scale: 1, duration: 0.6, ease: 'power3.out' }, 1);
+      tl.fromTo(waves,
+        { scale: 0.3, opacity: 0.9 },
+        { scale: 5.4, opacity: 0, duration: 0.6, ease: 'power2.out', stagger: 0.12 }, 1.1);
+      tl.fromTo($('#showcaseCard .card__nfc'), { opacity: 1 },
+        { opacity: 0.2, duration: 0.3, ease: 'power2.out' }, 1.3);
+
+      /* beat 2 — scan QR, garis cahaya melintas */
+      tl.to(phone, { rotate: 4, duration: 0.3, ease: 'power2.out' }, 2);
+      tl.set(waves, { scale: 0.3, opacity: 0 }, 2);
+      tl.fromTo(qrScan, { opacity: 0, y: 0 },
+        { opacity: 1, y: 250, duration: 0.6, ease: 'power1.inOut' }, 2.1);
+      tl.to(qrScan, { opacity: 0, duration: 0.2, ease: 'power2.out' }, 2.75);
+
+      /* beat 3 — layar rating, bintang menyala satu per satu */
+      tl.to(phone, { rotate: -4, duration: 0.3, ease: 'power2.out' }, 3);
+      tl.set(phStars, { clearProps: 'color' }, 3);
+      tl.fromTo(phStars, { scale: 0.45, opacity: 0.35 },
+        { scale: 1, opacity: 1, duration: 0.25, stagger: 0.08, ease: 'back.out(3)' }, 3.05);
+      tl.fromTo(phHint, { opacity: 0.4 }, { opacity: 1, duration: 0.4, ease: 'power2.out' }, 3.4);
+
+      /* beat 4 — routing: 4-5 bintang ke Google, 1-3 ke WhatsApp */
+      tl.to(phone, { rotate: 0, duration: 0.3, ease: 'power2.out' }, 4);
+      tl.call(() => phStars.forEach((s, si) => { if (si < 2) s.classList.remove('is-lit'); }), [], 4);
+      tl.fromTo(views.find((v) => v.dataset.view === 'route'),
+        { scale: 0.94 }, { scale: 1, duration: 0.4, ease: 'back.out(1.4)' }, 4.05);
+      tl.to(phStars, { scale: 0.72, color: '#d2d2d7', duration: 0.25, stagger: 0.05, ease: 'power2.out' }, 4.1);
 
       return () => {
         tl.scrollTrigger?.kill();
