@@ -12,7 +12,7 @@
   --ink: #000000;
   --ink-2: #1d1d1f;
   --gray: #6e6e73;
-  --gray-2: #86868b;
+  --gray-2: #5f5f63; /* kontras 6.36:1 di atas putih (dulu #86868b 3,62:1) */
   --blue: #0b57d0;
   --blue-d: #0842a0;
   --blue-l: #1a73e8;
@@ -209,6 +209,7 @@ dialog { border: 0; padding: 0; }
 }
 .btn--sm { padding: 9px 20px; font-size: 15px; }
 .btn--wide { width: 100%; }
+.btn--pill { border-radius: var(--r-pill); }
 .btn--primary { background: var(--blue); color: var(--white); }
 .btn--primary:hover { background: var(--blue-d); }
 .btn--ghost {
@@ -287,11 +288,9 @@ dialog { border: 0; padding: 0; }
   transform-origin: top;
   z-index: 1;
 }
-.preloader.is-done { pointer-events: none; }
-
 /* ---------- 7. NAVBAR ---------- */
 /* Navbar: satu-satunya elemen fixed yang memakai backdrop-filter.
-   Blur dikecilkan ke 10px — kompositor harus menghitung ulang backdrop
+   Blur dikecilkan ke 6px dan saturate() dihapus — kompositor harus menghitung ulang backdrop
    setiap kali halaman di-scroll di bawahnya, dan radius besar jauh lebih
    mahal daripada radius kecil dengan hasil visual hampir sama.
    Laidermark juga sudah cukup putih (0.82) sehingga blur tipis tetap
@@ -302,11 +301,11 @@ dialog { border: 0; padding: 0; }
   z-index: 100;
   height: var(--nav-h);
   background: rgba(255, 255, 255, .82);
-  -webkit-backdrop-filter: saturate(180%) blur(10px);
-  backdrop-filter: saturate(180%) blur(10px);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
   border-bottom: 1px solid transparent;
   transition: background-color .4s var(--e-out), border-color .4s var(--e-out), transform .45s var(--e-out);
-  contain: layout paint;
+  contain: layout; /* dulu "layout paint": paint memotong .nav__progress (bottom:-1px) */
 }
 .nav.is-scrolled {
   background: rgba(255, 255, 255, .92);
@@ -491,10 +490,16 @@ dialog { border: 0; padding: 0; }
   color: var(--gray);
   font-size: 15px;
 }
-.hero__meta li { display: flex; align-items: center; gap: 7px; }
+.hero__meta li { position: relative; display: flex; align-items: center; gap: 7px; }
 .hero__meta li + li::before {
   content: "";
   position: absolute;
+  left: -14px; /* tengah celah 28px antar item */
+  top: 50%;
+  width: 1px;
+  height: 1em;
+  background: var(--line);
+  transform: translateY(-50%);
 }
 .hero__meta strong { color: var(--ink); font-weight: 600; }
 
@@ -581,14 +586,6 @@ dialog { border: 0; padding: 0; }
   transform: translateX(-60%);
   pointer-events: none;
 }
-/* sheen statis: tidak berputar, hanya satu sapuan tipis di sudut
-   supaya kartu tetap terbaca saat dipin dan dirotasi */
-.card__sheen--static {
-  inset: 0;
-  background: linear-gradient(150deg, rgba(255, 255, 255, .55) 0%, transparent 34%);
-  transform: none;
-}
-
 /* Kartu di showcase: sheen dimatikan total. Kilau putih 80% opacity
    menutupi teks saat kartu miring, sehingga teks jadi tidak terbaca. */
 #showcaseCard .card__sheen { display: none; }
@@ -703,7 +700,7 @@ dialog { border: 0; padding: 0; }
    Warna dasar sudah terang supaya tetap terbaca di section gelap. */
 .showcase__title { font-size: clamp(30px, 3.7vw, 52px); margin-bottom: 40px; }
 .showcase__title .word__i {
-  color: rgba(255, 255, 255, .32);
+  color: rgba(255, 255, 255, .6);
   transition: color .45s var(--e-out);
 }
 .showcase__title .word__i.is-lit { color: var(--white); }
@@ -861,6 +858,7 @@ dialog { border: 0; padding: 0; }
 .gcard__count { color: var(--gray-2); font-size: 3.9cqw; margin-left: auto; }
 .gcard__btn {
   display: block;
+  white-space: nowrap; /* jangan patah 2 baris di HP mockup yang sempit */
   padding: 3.6cqw;
   border-radius: var(--r-pill);
   background: var(--blue);
@@ -1074,9 +1072,8 @@ dialog { border: 0; padding: 0; }
 .step__stars { display: flex; gap: 4px; margin-top: 16px; }
 .step__stars i {
   width: 13px; height: 13px;
-  background: var(--star);
+  background: #b45309; /* dulu var(--star) + opacity .25 (efektif 1,14:1); #b45309 = 5,02:1 di atas putih */
   clip-path: polygon(50% 0, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-  opacity: .25;
 }
 .step__title { margin-bottom: 10px; font-size: clamp(20px, .8vw + 16px, 26px); font-weight: 600; letter-spacing: -.022em; }
 .step__text { max-width: 30ch; margin-inline: auto; color: var(--gray); font-size: clamp(15px, .3vw + 14px, 17px); }
@@ -1174,6 +1171,7 @@ dialog { border: 0; padding: 0; }
   animation: mq 46s linear infinite;
 }
 .marquee__row:nth-child(2) .marquee__track { animation-duration: 56s; }
+.marquee__track--rev { animation-direction: reverse; }
 .marquee:hover .marquee__track { animation-play-state: paused; }
 @keyframes mq { to { transform: translateX(-100%); } }
 
@@ -1347,7 +1345,7 @@ dialog { border: 0; padding: 0; }
 .closing__contact a:hover { color: var(--wa); }
 
 /* ---------- 20. FOOTER ---------- */
-.footer { padding-block: clamp(60px, 7vw, 96px) 32px; background: var(--ink); color: #a1a1a6; }
+.footer { padding-block: clamp(60px, 7vw, 96px) 120px; background: var(--ink); color: #a1a1a6; } /* padding bawah 120px: FAB fixed tidak menutupi teks footer */
 .footer__grid {
   display: grid;
   grid-template-columns: 1.6fr 1fr 1fr 1.2fr;
@@ -1394,7 +1392,7 @@ dialog { border: 0; padding: 0; }
   height: 56px;
   padding-inline: 18px;
   border-radius: var(--r-pill);
-  background: var(--wa);
+  background: #0b6b30; /* kontras teks putih 6,65:1; dulu var(--wa) #25d366 = 1,98:1. --wa tidak diubah */
   color: #fff;
   box-shadow: 0 12px 32px rgba(37, 211, 102, .34);
   transition: transform .4s var(--e-out), box-shadow .4s var(--e-out);
@@ -1407,14 +1405,17 @@ dialog { border: 0; padding: 0; }
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  box-shadow: 0 0 0 0 rgba(37, 211, 102, .5);
+  border: 2px solid rgba(37, 211, 102, .5);
+  opacity: 0;
   animation: fabPulse 2.6s var(--e-out) infinite;
   pointer-events: none;
 }
+/* dulu menganimasikan box-shadow (paint tiap frame); sekarang hanya
+   transform + opacity yang compositor-friendly */
 @keyframes fabPulse {
-  0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, .45); }
-  70% { box-shadow: 0 0 0 18px rgba(37, 211, 102, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+  0% { transform: scale(1); opacity: .5; }
+  70% { transform: scale(1.45); opacity: 0; }
+  100% { transform: scale(1.45); opacity: 0; }
 }
 
 /* ---------- 22. MODAL PESANAN ---------- */
@@ -1439,8 +1440,12 @@ dialog { border: 0; padding: 0; }
   overscroll-behavior: contain;
 }
 .modal__close {
-  position: absolute;
-  top: 16px; right: 16px;
+  position: sticky;
+  top: 16px;
+  z-index: 2;
+  justify-self: end;
+  margin-bottom: -36px; /* tetap di baris atas tanpa menambah tinggi panel */
+  right: 16px;
   width: 36px; height: 36px;
   display: grid;
   place-items: center;
@@ -1502,7 +1507,7 @@ dialog { border: 0; padding: 0; }
    Kalau ditulis di sini, GSAP akan membaca translateY(%) sebagai nilai px
    dan `yPercent: 0` tidak akan mengembalikannya ke tempat. */
 .js [data-anim] { transform: translateY(26px); }
-.js .beat { opacity: 0; visibility: hidden; }
+.js .beat:not(.is-active) { opacity: 0; visibility: hidden; }
 .js .beat:not(.is-active) { pointer-events: none; }
 
 .no-js [data-anim], .no-js .word__i { opacity: 1 !important; transform: none !important; }
@@ -1519,13 +1524,14 @@ dialog { border: 0; padding: 0; }
 
 /* ---------- 24. RESPONSIF ---------- */
 @media (max-width: 1080px) {
+  .bento__viz { display: none; } /* dulu menimpa teks kartu wide di tablet 834px */
   .bento__card--wide { grid-column: span 2; }
   .bento { grid-template-columns: repeat(2, 1fr); }
   .bento__card--tall { grid-row: span 1; }
   .footer__grid { grid-template-columns: 1fr 1fr; }
 }
 
-@media (max-width: 940px) {
+@media (max-width: 940.5px) { /* selaras dengan JS matchMedia min-width:941px di lebar fraksional */
   :root { --sec-pad: clamp(80px, 11vh, 120px); }
 
   .nav__links { display: none; }
@@ -1562,8 +1568,9 @@ dialog { border: 0; padding: 0; }
   .stat-row { grid-template-columns: 1fr; }
   .showcase__stage { min-height: 380px; }
   .card-scene--lg { width: 92%; }
+  #showcaseCard .card-3d__face { padding-right: 30%; } /* dulu 42%: HP 120px tidak lagi menutupi foot kartu */
   .beats { min-height: 260px; }
-  .phone { width: 132px; bottom: 0; }
+  .phone { width: 120px; right: 0; bottom: 0; }
   .footer__grid { grid-template-columns: 1fr; }
   .field-row { grid-template-columns: 1fr; }
   .fab { height: 52px; }
