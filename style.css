@@ -1,6 +1,6 @@
 /* ==========================================================================
    Google Card Review — Landing Page
-   Apple-inspired: ruang lega, tipografi besar, palet minimal, aksen biru #1a73e8
+   Apple-inspired: ruang lega, tipografi besar, palet minimal, aksen biru #0b57d0
    ========================================================================== */
 
 /* ---------- 1. TOKENS ---------- */
@@ -13,9 +13,9 @@
   --ink-2: #1d1d1f;
   --gray: #6e6e73;
   --gray-2: #86868b;
-  --blue: #1a73e8;
-  --blue-d: #1765cc;
-  --blue-l: #4285f4;
+  --blue: #0b57d0;
+  --blue-d: #0842a0;
+  --blue-l: #1a73e8;
   --wa: #25d366;
   --star: #ffb400;
 
@@ -138,7 +138,7 @@ dialog { border: 0; padding: 0; }
   width: 7px; height: 7px;
   border-radius: 50%;
   background: var(--blue);
-  box-shadow: 0 0 0 4px rgba(26, 115, 232, .16);
+  box-shadow: 0 0 0 4px rgba(11, 87, 208, .16);
 }
 
 .note {
@@ -445,7 +445,7 @@ dialog { border: 0; padding: 0; }
   width: min(900px, 92vw);
   aspect-ratio: 1;
   border-radius: 50%;
-  background: radial-gradient(circle at 50% 50%, rgba(26, 115, 232, .16), rgba(26, 115, 232, 0) 62%);
+  background: radial-gradient(circle at 50% 50%, rgba(11, 87, 208, .16), rgba(11, 87, 208, 0) 62%);
   pointer-events: none;
 }
 .hero__grid {
@@ -648,7 +648,7 @@ dialog { border: 0; padding: 0; }
   top: 0;
   height: 3px;
   background: linear-gradient(90deg, transparent, var(--blue), transparent);
-  box-shadow: 0 0 18px 3px rgba(26, 115, 232, .5);
+  box-shadow: 0 0 18px 3px rgba(11, 87, 208, .5);
   opacity: 0;
 }
 
@@ -661,7 +661,7 @@ dialog { border: 0; padding: 0; }
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse 60% 45% at 22% 45%, rgba(26, 115, 232, .22), transparent 65%),
+    radial-gradient(ellipse 60% 45% at 22% 45%, rgba(11, 87, 208, .22), transparent 65%),
     radial-gradient(ellipse 50% 40% at 85% 75%, rgba(66, 133, 244, .14), transparent 70%);
   pointer-events: none;
 }
@@ -966,7 +966,7 @@ dialog { border: 0; padding: 0; }
   inset: 0;
   z-index: -1;
   border-radius: inherit;
-  background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), rgba(26, 115, 232, .13), transparent 62%);
+  background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), rgba(11, 87, 208, .13), transparent 62%);
   opacity: 0;
   transition: opacity .45s var(--e-out);
 }
@@ -982,7 +982,7 @@ dialog { border: 0; padding: 0; }
   width: 46px; height: 46px;
   margin-bottom: 20px;
   border-radius: 14px;
-  background: rgba(26, 115, 232, .1);
+  background: rgba(11, 87, 208, .1);
   color: var(--blue);
 }
 .bento__icon svg { width: 22px; height: 22px; }
@@ -1212,7 +1212,7 @@ dialog { border: 0; padding: 0; }
 .pricing__bg {
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse 55% 40% at 50% 0%, rgba(26, 115, 232, .18), transparent 68%);
+  background: radial-gradient(ellipse 55% 40% at 50% 0%, rgba(11, 87, 208, .18), transparent 68%);
   pointer-events: none;
 }
 .plans {
@@ -1234,8 +1234,8 @@ dialog { border: 0; padding: 0; }
 }
 .plan:hover { transform: translateY(-6px); background: rgba(255, 255, 255, .07); }
 .plan--pro {
-  background: linear-gradient(180deg, rgba(26, 115, 232, .2), rgba(255, 255, 255, .05));
-  box-shadow: inset 0 0 0 2px var(--blue), 0 24px 60px rgba(26, 115, 232, .22);
+  background: linear-gradient(180deg, rgba(11, 87, 208, .2), rgba(255, 255, 255, .05));
+  box-shadow: inset 0 0 0 2px var(--blue), 0 24px 60px rgba(11, 87, 208, .22);
 }
 .plan__badge {
   position: absolute;
@@ -1318,7 +1318,7 @@ dialog { border: 0; padding: 0; }
   width: min(1100px, 120vw);
   aspect-ratio: 1;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(26, 115, 232, .3), transparent 62%);
+  background: radial-gradient(circle, rgba(11, 87, 208, .3), transparent 62%);
   /* horizontal center ditangani GSAP xPercent, bukan translateX,
      supaya parallax yPercent tidak menimpa translate */
   transform: translateX(-50%);
@@ -1471,7 +1471,7 @@ dialog { border: 0; padding: 0; }
 .field input:focus, .field select:focus, .field textarea:focus {
   outline: none;
   border-color: var(--blue);
-  box-shadow: 0 0 0 3px rgba(26, 115, 232, .16);
+  box-shadow: 0 0 0 3px rgba(11, 87, 208, .16);
 }
 .modal__foot { color: var(--gray-2); font-size: 13px; text-align: center; }
 
